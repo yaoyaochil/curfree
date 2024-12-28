@@ -48,12 +48,9 @@ jobs:
           create-dmg \
             --volname "curfree-universal" \
             --volicon "../build/icons.icns" \
-            --background "../build/background.png" \
-            --window-size 540 380 \
-            --icon-size 100 \
-            --icon "curfree.app" 130 190 \
+            --icon "curfree.app" 128 128 \
             --hide-extension "curfree.app" \
-            --app-drop-link 410 190 \
+            --app-drop-link 384 128 \
             "curfree-universal.dmg" \
             "curfree.app"
           cd ..
@@ -70,12 +67,9 @@ jobs:
           create-dmg \
             --volname "curfree-arm64" \
             --volicon "../build/icons.icns" \
-            --background "../build/background.png" \
-            --window-size 540 380 \
-            --icon-size 100 \
-            --icon "curfree.app" 130 190 \
+            --icon "curfree.app" 128 128 \
             --hide-extension "curfree.app" \
-            --app-drop-link 410 190 \
+            --app-drop-link 384 128 \
             "curfree-arm64.dmg" \
             "curfree.app"
           cd ..

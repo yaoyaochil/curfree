@@ -51,3 +51,10 @@ tasks:
       - darwin:build:universal
     cmds:
       - task: darwin:create:app:bundle
+
+  darwin:package:arm64:
+    summary: Packages darwin arm64 binary
+    deps:
+      - darwin:build:arm64
+    cmds:
+      - task: darwin:create:app:bundle

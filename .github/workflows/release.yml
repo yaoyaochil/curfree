@@ -1,0 +1,89 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*" # 触发标签格式为 v开头，例如 v1.0.0
+
+jobs:
+  release:
+    name: Release
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install frontend dependencies
+        run: cd frontend && npm install
+
+      - name: Install wails
+        run: go install github.com/wailsapp/wails/v3/cmd/wails@latest
+
+      - name: Install create-dmg
+        run: npm install -g create-dmg
+
+      - name: Build Universal Version
+        run: |
+          # 构建 Universal 版本
+          wails build -platform darwin/universal
+          cd build/bin
+          # 创建 Universal 版本的 zip
+          zip -r CursorFree-macos-universal.zip CursorFree.app
+          # 创建 Universal 版本的 dmg
+          create-dmg \
+            --volname "CursorFree-Universal" \
+            --volicon "../../build/icons.icns" \
+            --background "../../build/background.png" \
+            --window-pos 200 120 \
+            --window-size 800 400 \
+            --icon-size 100 \
+            --icon "CursorFree.app" 200 190 \
+            --hide-extension "CursorFree.app" \
+            --app-drop-link 600 185 \
+            "CursorFree-universal.dmg" \
+            "CursorFree.app"
+          cd ../..
+
+      - name: Build ARM Version
+        run: |
+          # 构建 ARM 版本
+          wails build -platform darwin/arm64
+          cd build/bin
+          # 创建 ARM 版本的 zip
+          zip -r CursorFree-macos-arm64.zip CursorFree.app
+          # 创建 ARM 版本的 dmg
+          create-dmg \
+            --volname "CursorFree-ARM64" \
+            --volicon "../../build/icons.icns" \
+            --background "../../build/background.png" \
+            --window-pos 200 120 \
+            --window-size 800 400 \
+            --icon-size 100 \
+            --icon "CursorFree.app" 200 190 \
+            --hide-extension "CursorFree.app" \
+            --app-drop-link 600 185 \
+            "CursorFree-arm64.dmg" \
+            "CursorFree.app"
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/bin/CursorFree-macos-universal.zip
+            build/bin/CursorFree-universal.dmg
+            build/bin/CursorFree-macos-arm64.zip
+            build/bin/CursorFree-arm64.dmg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

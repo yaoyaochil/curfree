@@ -31,7 +31,6 @@ tasks:
     summary: Runs the application in development mode
     cmds:
       - wails3 dev -config ./build/config.yml -port {{.VITE_PORT}}
-
   darwin:build:universal:
     summary: Builds darwin universal binary (arm64 + amd64)
     cmds:

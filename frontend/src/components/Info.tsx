@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { type CursorConfig, CursorService } from "@service/service";
+import { AppService, type CursorConfig, CursorService } from "@service/service";
 import { motion } from "framer-motion";
 import { ActionButton } from "./ActionButton";
 import { ConfigItem } from "./ConfigItem";
 import { FeedbackMessage } from "./FeedbackMessage";
+import { PowerIcon } from "@heroicons/react/24/outline";
 
 // 反馈消息状态接口定义
 // Feedback message state interface definition
@@ -267,7 +268,7 @@ export default function Info() {
 
                 {/* 配置项列表 */}
                 {/* Configuration items list */}
-                <div className="grid gap-2 overflow-auto">
+                <div className="grid gap-2 overflow-hidden">
                     {/* Machine ID 配置项 */}
                     {/* Machine ID configuration item */}
                     <ConfigItem
@@ -299,6 +300,24 @@ export default function Info() {
                         value={cursorConfig?.configPath ?? ""}
                     />
                 </div>
+            </motion.div>
+
+            {/* 退出按钮 */}
+            {/* Quit button */}
+            <motion.div
+                className="flex justify-end mt-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+            >
+                <motion.button
+                    onClick={() => AppService.QuitApp()}
+                    className="cursor-pointer mr-2 mb-2 p-2 text-sm font-medium text-white bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <PowerIcon className="w-4 h-4" />
+                </motion.button>
             </motion.div>
         </motion.div>
     );

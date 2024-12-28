@@ -38,8 +38,20 @@ jobs:
 
       - name: Build Universal Version
         run: |
-          # 构建 Universal 版本
-          wails3 package -platform darwin/universal
+          # 构建 Intel 版本
+          GOOS=darwin GOARCH=amd64 wails3 task darwin:build
+          mv bin/curfree bin/curfree-amd64
+          
+          # 构建 ARM 版本
+          GOOS=darwin GOARCH=arm64 wails3 task darwin:build
+          mv bin/curfree bin/curfree-arm64
+          
+          # 合并为 Universal Binary
+          lipo -create -output bin/curfree bin/curfree-amd64 bin/curfree-arm64
+          
+          # 打包为 app
+          wails3 task darwin:package
+          
           cd bin
           # 创建 Universal 版本的 zip
           zip -r CursorFree-macos-universal.zip CursorFree.app
@@ -61,7 +73,9 @@ jobs:
       - name: Build ARM Version
         run: |
           # 构建 ARM 版本
-          wails3 package -platform darwin/arm64
+          GOOS=darwin GOARCH=arm64 wails3 task darwin:build
+          wails3 task darwin:package
+          
           cd bin
           # 创建 ARM 版本的 zip
           zip -r CursorFree-macos-arm64.zip CursorFree.app

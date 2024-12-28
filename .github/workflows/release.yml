@@ -49,12 +49,11 @@ jobs:
             --volname "curfree-universal" \
             --volicon "../build/icons.icns" \
             --background "../build/background.png" \
-            --window-pos 200 120 \
-            --window-size 800 400 \
+            --window-size 540 380 \
             --icon-size 100 \
-            --icon "curfree.app" 200 190 \
+            --icon "curfree.app" 130 190 \
             --hide-extension "curfree.app" \
-            --app-drop-link 600 185 \
+            --app-drop-link 410 190 \
             "curfree-universal.dmg" \
             "curfree.app"
           cd ..
@@ -72,12 +71,11 @@ jobs:
             --volname "curfree-arm64" \
             --volicon "../build/icons.icns" \
             --background "../build/background.png" \
-            --window-pos 200 120 \
-            --window-size 800 400 \
+            --window-size 540 380 \
             --icon-size 100 \
-            --icon "curfree.app" 200 190 \
+            --icon "curfree.app" 130 190 \
             --hide-extension "curfree.app" \
-            --app-drop-link 600 185 \
+            --app-drop-link 410 190 \
             "curfree-arm64.dmg" \
             "curfree.app"
           cd ..

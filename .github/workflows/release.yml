@@ -18,7 +18,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.21'
+          go-version: '1.22'
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -29,7 +29,9 @@ jobs:
         run: cd frontend && npm install
 
       - name: Install wails
-        run: go install github.com/wailsapp/wails/v3/cmd/wails@latest
+        run: |
+          go install -v github.com/wailsapp/wails/v3/cmd/wails3@latest
+          wails3 doctor
 
       - name: Install create-dmg
         run: npm install -g create-dmg
@@ -37,7 +39,7 @@ jobs:
       - name: Build Universal Version
         run: |
           # 构建 Universal 版本
-          wails build -platform darwin/universal
+          wails3 build -platform darwin/universal
           cd build/bin
           # 创建 Universal 版本的 zip
           zip -r CursorFree-macos-universal.zip CursorFree.app
@@ -59,7 +61,7 @@ jobs:
       - name: Build ARM Version
         run: |
           # 构建 ARM 版本
-          wails build -platform darwin/arm64
+          wails3 build -platform darwin/arm64
           cd build/bin
           # 创建 ARM 版本的 zip
           zip -r CursorFree-macos-arm64.zip CursorFree.app

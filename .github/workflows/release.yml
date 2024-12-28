@@ -39,7 +39,7 @@ jobs:
       - name: Build Universal Version
         run: |
           # 构建 Universal 版本
-          wails3 build -platform darwin/universal
+          wails3 task darwin:build ARCH=universal
           cd build/bin
           # 创建 Universal 版本的 zip
           zip -r CursorFree-macos-universal.zip CursorFree.app
@@ -61,7 +61,7 @@ jobs:
       - name: Build ARM Version
         run: |
           # 构建 ARM 版本
-          wails3 build -platform darwin/arm64
+          wails3 task darwin:build ARCH=arm64
           cd build/bin
           # 创建 ARM 版本的 zip
           zip -r CursorFree-macos-arm64.zip CursorFree.app

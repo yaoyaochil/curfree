@@ -39,15 +39,15 @@ jobs:
       - name: Build Universal Version
         run: |
           # 构建 Universal 版本
-          wails3 task darwin:build ARCH=universal
-          cd build/bin
+          wails3 package -platform darwin/universal
+          cd bin
           # 创建 Universal 版本的 zip
           zip -r CursorFree-macos-universal.zip CursorFree.app
           # 创建 Universal 版本的 dmg
           create-dmg \
             --volname "CursorFree-Universal" \
-            --volicon "../../build/icons.icns" \
-            --background "../../build/background.png" \
+            --volicon "../build/icons.icns" \
+            --background "../build/background.png" \
             --window-pos 200 120 \
             --window-size 800 400 \
             --icon-size 100 \
@@ -56,20 +56,20 @@ jobs:
             --app-drop-link 600 185 \
             "CursorFree-universal.dmg" \
             "CursorFree.app"
-          cd ../..
+          cd ..
 
       - name: Build ARM Version
         run: |
           # 构建 ARM 版本
-          wails3 task darwin:build ARCH=arm64
-          cd build/bin
+          wails3 package -platform darwin/arm64
+          cd bin
           # 创建 ARM 版本的 zip
           zip -r CursorFree-macos-arm64.zip CursorFree.app
           # 创建 ARM 版本的 dmg
           create-dmg \
             --volname "CursorFree-ARM64" \
-            --volicon "../../build/icons.icns" \
-            --background "../../build/background.png" \
+            --volicon "../build/icons.icns" \
+            --background "../build/background.png" \
             --window-pos 200 120 \
             --window-size 800 400 \
             --icon-size 100 \
@@ -78,14 +78,15 @@ jobs:
             --app-drop-link 600 185 \
             "CursorFree-arm64.dmg" \
             "CursorFree.app"
+          cd ..
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/bin/CursorFree-macos-universal.zip
-            build/bin/CursorFree-universal.dmg
-            build/bin/CursorFree-macos-arm64.zip
-            build/bin/CursorFree-arm64.dmg
+            bin/CursorFree-macos-universal.zip
+            bin/CursorFree-universal.dmg
+            bin/CursorFree-macos-arm64.zip
+            bin/CursorFree-arm64.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

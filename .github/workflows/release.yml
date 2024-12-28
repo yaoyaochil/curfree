@@ -43,20 +43,20 @@ jobs:
           
           cd bin
           # 创建 Universal 版本的 zip
-          zip -r CursorFree-macos-universal.zip CursorFree.app
+          zip -r curfree-macos-universal.zip curfree.app
           # 创建 Universal 版本的 dmg
           create-dmg \
-            --volname "CursorFree-Universal" \
+            --volname "curfree-universal" \
             --volicon "../build/icons.icns" \
             --background "../build/background.png" \
             --window-pos 200 120 \
             --window-size 800 400 \
             --icon-size 100 \
-            --icon "CursorFree.app" 200 190 \
-            --hide-extension "CursorFree.app" \
+            --icon "curfree.app" 200 190 \
+            --hide-extension "curfree.app" \
             --app-drop-link 600 185 \
-            "CursorFree-universal.dmg" \
-            "CursorFree.app"
+            "curfree-universal.dmg" \
+            "curfree.app"
           cd ..
 
       - name: Build ARM Version
@@ -66,29 +66,29 @@ jobs:
           
           cd bin
           # 创建 ARM 版本的 zip
-          zip -r CursorFree-macos-arm64.zip CursorFree.app
+          zip -r curfree-macos-arm64.zip curfree.app
           # 创建 ARM 版本的 dmg
           create-dmg \
-            --volname "CursorFree-ARM64" \
+            --volname "curfree-arm64" \
             --volicon "../build/icons.icns" \
             --background "../build/background.png" \
             --window-pos 200 120 \
             --window-size 800 400 \
             --icon-size 100 \
-            --icon "CursorFree.app" 200 190 \
-            --hide-extension "CursorFree.app" \
+            --icon "curfree.app" 200 190 \
+            --hide-extension "curfree.app" \
             --app-drop-link 600 185 \
-            "CursorFree-arm64.dmg" \
-            "CursorFree.app"
+            "curfree-arm64.dmg" \
+            "curfree.app"
           cd ..
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            bin/CursorFree-macos-universal.zip
-            bin/CursorFree-universal.dmg
-            bin/CursorFree-macos-arm64.zip
-            bin/CursorFree-arm64.dmg
+            bin/curfree-macos-universal.zip
+            bin/curfree-universal.dmg
+            bin/curfree-macos-arm64.zip
+            bin/curfree-arm64.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

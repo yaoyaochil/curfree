@@ -33,8 +33,8 @@ jobs:
           go install -v github.com/wailsapp/wails/v3/cmd/wails3@latest
           wails3 doctor
 
-      - name: Install create-dmg
-        run: npm install -g create-dmg
+      - name: Install appdmg
+        run: npm install -g appdmg
 
       - name: Build All Versions
         run: |

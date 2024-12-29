@@ -59,9 +59,13 @@ tasks:
       - task: darwin:package
       - mkdir -p {{.BIN_DIR}}/packages
       - ditto -c -k --keepParent {{.BIN_DIR}}/{{.APP_NAME}}.app {{.BIN_DIR}}/packages/{{.APP_NAME}}-arm64.zip
-      - create-dmg --volname "{{.APP_NAME}}-arm64" --volicon "build/icons.icns" --icon "{{.APP_NAME}}.app" 128 128 --hide-extension "{{.APP_NAME}}.app" --app-drop-link 384 128 "{{.BIN_DIR}}/packages/{{.APP_NAME}}-arm64.dmg" "{{.BIN_DIR}}/{{.APP_NAME}}.app"
+      - cp build/appdmg.json {{.BIN_DIR}}/appdmg-arm64.json
+      - sed -i '' 's/APP_NAME/{{.APP_NAME}}-arm64/g' {{.BIN_DIR}}/appdmg-arm64.json
+      - cd build && appdmg ../{{.BIN_DIR}}/appdmg-arm64.json ../{{.BIN_DIR}}/packages/{{.APP_NAME}}-arm64.dmg
 
       # Build and package universal version
       - task: darwin:package:universal
       - ditto -c -k --keepParent {{.BIN_DIR}}/{{.APP_NAME}}.app {{.BIN_DIR}}/packages/{{.APP_NAME}}-universal.zip
-      - create-dmg --volname "{{.APP_NAME}}-universal" --volicon "build/icons.icns" --icon "{{.APP_NAME}}.app" 128 128 --hide-extension "{{.APP_NAME}}.app" --app-drop-link 384 128 "{{.BIN_DIR}}/packages/{{.APP_NAME}}-universal.dmg" "{{.BIN_DIR}}/{{.APP_NAME}}.app"
+      - cp build/appdmg.json {{.BIN_DIR}}/appdmg-universal.json
+      - sed -i '' 's/APP_NAME/{{.APP_NAME}}-universal/g' {{.BIN_DIR}}/appdmg-universal.json
+      - cd build && appdmg ../{{.BIN_DIR}}/appdmg-universal.json ../{{.BIN_DIR}}/packages/{{.APP_NAME}}-universal.dmg

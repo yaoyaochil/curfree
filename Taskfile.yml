@@ -52,9 +52,16 @@ tasks:
     cmds:
       - task: darwin:create:app:bundle
 
-  darwin:package:arm64:
-    summary: Packages darwin arm64 binary
-    deps:
-      - darwin:build:arm64
+  darwin:package:all:
+    summary: Packages both arm64 and universal builds with zip and dmg
     cmds:
-      - task: darwin:create:app:bundle
+      # Build and package arm64 version
+      - task: darwin:package
+      - mkdir -p {{.BIN_DIR}}/packages
+      - ditto -c -k --keepParent {{.BIN_DIR}}/{{.APP_NAME}}.app {{.BIN_DIR}}/packages/{{.APP_NAME}}-arm64.zip
+      - create-dmg --volname "{{.APP_NAME}}-arm64" --volicon "build/icons.icns" --icon "{{.APP_NAME}}.app" 128 128 --hide-extension "{{.APP_NAME}}.app" --app-drop-link 384 128 "{{.BIN_DIR}}/packages/{{.APP_NAME}}-arm64.dmg" "{{.BIN_DIR}}/{{.APP_NAME}}.app"
+
+      # Build and package universal version
+      - task: darwin:package:universal
+      - ditto -c -k --keepParent {{.BIN_DIR}}/{{.APP_NAME}}.app {{.BIN_DIR}}/packages/{{.APP_NAME}}-universal.zip
+      - create-dmg --volname "{{.APP_NAME}}-universal" --volicon "build/icons.icns" --icon "{{.APP_NAME}}.app" 128 128 --hide-extension "{{.APP_NAME}}.app" --app-drop-link 384 128 "{{.BIN_DIR}}/packages/{{.APP_NAME}}-universal.dmg" "{{.BIN_DIR}}/{{.APP_NAME}}.app"

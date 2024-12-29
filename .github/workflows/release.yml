@@ -36,51 +36,18 @@ jobs:
       - name: Install create-dmg
         run: npm install -g create-dmg
 
-      - name: Build Universal Version
+      - name: Build All Versions
         run: |
-          # 构建 Universal 版本
-          wails3 task darwin:package:universal
-          
-          cd bin
-          # 创建 Universal 版本的 zip
-          zip -r curfree-macos-universal.zip curfree.app
-          # 创建 Universal 版本的 dmg
-          create-dmg \
-            --volname "curfree-universal" \
-            --volicon "../build/icons.icns" \
-            --icon "curfree.app" 128 128 \
-            --hide-extension "curfree.app" \
-            --app-drop-link 384 128 \
-            "curfree-universal.dmg" \
-            "curfree.app"
-          cd ..
-
-      - name: Build ARM Version
-        run: |
-          # 构建 ARM 版本
-          wails3 task darwin:package
-          
-          cd bin
-          # 创建 ARM 版本的 zip
-          zip -r curfree-macos-arm64.zip curfree.app
-          # 创建 ARM 版本的 dmg
-          create-dmg \
-            --volname "curfree-arm64" \
-            --volicon "../build/icons.icns" \
-            --icon "curfree.app" 128 128 \
-            --hide-extension "curfree.app" \
-            --app-drop-link 384 128 \
-            "curfree-arm64.dmg" \
-            "curfree.app"
-          cd ..
+          # 使用新的 task 构建所有版本
+          wails3 task darwin:package:all
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            bin/curfree-macos-universal.zip
-            bin/curfree-universal.dmg
-            bin/curfree-macos-arm64.zip
-            bin/curfree-arm64.dmg
+            bin/packages/curfree-universal.zip
+            bin/packages/curfree-universal.dmg
+            bin/packages/curfree-arm64.zip
+            bin/packages/curfree-arm64.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

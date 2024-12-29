@@ -152,7 +152,7 @@ export default function Info() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="h-full flex flex-col gap-2 overflow-hidden"
+            className="h-full flex flex-col gap-2"
         >
             {/* 标题区域 */}
             {/* Title section */}
@@ -173,7 +173,7 @@ export default function Info() {
                                 <h1 className="text-md bg-gradient-to-r from-primary to-secondary bg-clip-text text-primary text-text whitespace-nowrap">
                                     Cursor Free
                                 </h1>
-                                <p className="text-xs text-secondary whitespace-nowrap">
+                                <p className="text-xs text-text-secondary whitespace-nowrap">
                                     Cursor Too Many Free Fixed 👹
                                 </p>
                             </div>
@@ -188,7 +188,7 @@ export default function Info() {
             {/* 配置信息区域 */}
             {/* Configuration information section */}
             <motion.div
-                className="flex-1 flex flex-col gap-2 bg-secondary/50 rounded-lg p-3 overflow-hidden"
+                className="flex-1 flex flex-col gap-2 bg-secondary/50 rounded-lg p-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}

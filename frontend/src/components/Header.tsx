@@ -10,18 +10,16 @@ export default function Header() {
         const prefersDark =
             window.matchMedia("(prefers-color-scheme: dark)").matches;
         setIsDark(prefersDark);
-        document.documentElement.setAttribute(
-            "data-theme",
-            prefersDark ? "dark" : "light",
-        );
+        if (prefersDark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
     }, []);
 
     const toggleTheme = () => {
         setIsDark(!isDark);
-        document.documentElement.setAttribute(
-            "data-theme",
-            !isDark ? "dark" : "light",
-        );
+        document.documentElement.classList.toggle("dark");
     };
 
     return (
@@ -29,7 +27,7 @@ export default function Header() {
             {/* 右上角 - 主题切换按钮 */}
             <div className="absolute top-1 right-1">
                 <button
-                    className="theme-toggle cursor-pointer p-2 rounded-lg bg-secondary hover:hover transition-colors"
+                    className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
                     onClick={toggleTheme}
                 >
                     {isDark

@@ -4,6 +4,9 @@ on:
     tags:
       - "v*" # 触发标签格式为 v开头，例如 v1.0.0
 
+permissions:
+  contents: write
+
 jobs:
   release:
     name: Release
@@ -43,11 +46,11 @@ jobs:
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
             bin/packages/curfree-universal.zip
             bin/packages/curfree-universal.dmg
             bin/packages/curfree-arm64.zip
-            bin/packages/curfree-arm64.dmg
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+            bin/packages/curfree-arm64.dmg 

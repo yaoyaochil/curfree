@@ -8,7 +8,7 @@
 
 群号：921915226
 
-![QQ群](https://github.com/user-attachments/assets/a8518788-7640-460d-aa36-abf772c83055)
+<img src="https://github.com/user-attachments/assets/a8518788-7640-460d-aa36-abf772c83055" width="50%" alt="QQ群">
 
 Curfree 是一个免费工具，专门用于解决 Cursor 编辑器的 TooMany 机器码问题。
 

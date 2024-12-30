@@ -8,7 +8,7 @@ Join our QQ group for discussions and support:
 
 Group Number: 921915226
 
-![QQ Group](https://github.com/user-attachments/assets/a8518788-7640-460d-aa36-abf772c83055)
+<img src="https://github.com/user-attachments/assets/a8518788-7640-460d-aa36-abf772c83055" width="50%" alt="QQ群">
 
 Curfree is a free tool designed to fix the Cursor TooMany machine code issue.
 

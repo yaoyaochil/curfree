@@ -2,6 +2,14 @@
 
 [English](README.md) | [简体中文](README_zh.md)
 
+## 💬 Community
+
+Join our QQ group for discussions and support:
+
+Group Number: 921915226
+
+![QQ Group](https://github.com/user-attachments/assets/a8518788-7640-460d-aa36-abf772c83055)
+
 Curfree is a free tool designed to fix the Cursor TooMany machine code issue.
 
 Key Features:

@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 /* 确保所有元素使用 border-box */
-/* *, *::before, *::after {
+*, *::before, *::after {
   box-sizing: border-box;
-} */
+  outline: none;
+}
 
 body {
   background-color: transparent;
